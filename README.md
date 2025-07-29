@@ -155,6 +155,8 @@ logistic_model <- glm(cesareanbinary ~ age + marital + education, data = cesarea
 summary(logistic_model)
 ``` </pre>
 
+<img width="579" height="761" alt="image" src="https://github.com/user-attachments/assets/74c9d8d9-7872-4e57-aeb5-9b006570e814" />
+
 # 📋 Results
 - Age: For each additional year of age, the odds of having a Caesarean slightly decrease.
 

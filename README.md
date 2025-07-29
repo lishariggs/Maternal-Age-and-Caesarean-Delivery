@@ -98,6 +98,36 @@ describe(cesarean_data)
 table1(~ cesareanbinary + age + marital + education, data = cesarean_data, caption = "Basic Stats")
 ``` </pre>
 
+<img width="562" height="192" alt="image" src="https://github.com/user-attachments/assets/cf55d97f-da88-4f4b-af88-6e39fb4d9c51" />
+
+# Data Visualization
+Next, after obtaining the descriptive statistics, I proceeded to visualize the distribution of ages in my dataset using a histogram. This helps me understand the spread and shape of the age data. Lastly,I box plot to compare the distribution of age between mothers who had Caesarean deliveries and those who did not. This can help identify any differences or similarities in the age distributions between the two groups. 
+
+The ggplot(data= cesarean_data, aes(x = factor(cesareanbinary), y = age, fill = factor(cesareanbinary))) line specifies the data frame (cesarean_data) and the aesthetic mappings (aes) for the plot. Next, factor(cesareanbinary) is mapped to the x-axis (to create separate box plots for each category), age is mapped to the y-axis, and ‘fill’ is used to differentiate between mothers who had Caesarean deliveries and those who did not. 
+
+Next, geom_boxplot(alpha = 0.7, outlier.alpha = 0) adds a layer of box plots to the plot. The alpha argument controls the transparency of the box plots, and outlier.alpha controls the transparency of any outlier points. The labs() function is used to customize the plot labels, title, and legend title (fill). You can specify the x-axis label (x), y-axis label (y), and the plot title (title) within this function. The scale_fill_manual(values = c(“red”, “#purple”)) line customizes the fill colors of the box plots for the two categories (0 = No Caesarean, 1 = Caesarean). Lastly, the theme_minimal() function applies a minimal theme to the plot, removing unnecessary elements to improve clarity.
+
+ <pre lang="markdown"> 
+```r 
+  hist(cesarean_data$age)
+  ``` </pre>
+ 
+  <img width="694" height="447" alt="image" src="https://github.com/user-attachments/assets/6240eb36-2d4a-4aa0-afbe-6f4d78e44145" />
+
+ <pre lang="markdown"> 
+```r 
+ggplot(data = cesarean_data, aes(x = factor(cesareanbinary), y = age, fill = factor(cesareanbinary))) +
+geom_boxplot(alpha = 0.7, outlier.alpha = 0) +
+labs(x = "Caesarean Delivery", y = "Age of Mother",
+title = "Box Plot of Age by Caesarean Delivery Status",
+fill = "Caesarean Delivery") +
+scale_fill_manual(values = c("red", "purple")) +
+theme_minimal()  
+``` </pre>
+
+<img width="685" height="466" alt="image" src="https://github.com/user-attachments/assets/941bc7aa-e2b9-47be-bb6a-5652aa44a9c7" />
+
+
 # 🧠 Logistic Regression
 In this study, the primary research question is:
 - Does maternal age significantly influence the likelihood of a Caesarean delivery?
@@ -113,6 +143,8 @@ Outcome (dependent variable): cesareanbinary
 - 0 = No, the mother did not have a Caesarean
 
 The goal of logistic regression is to estimate the probability that a particular outcome occurs (e.g., a Caesarean) given the values of one or more independent variables (e.g., age, education, marital status).
+
+First, I will load the “MASS” package in order to conduct a to perform logistic regression with my cesarean data. I will use the “cesareanbinary” as the outcome variable and “age” as the predictor variable in the logistic regression model. I will perform logistic regression using the glm() function, specifying family = binomial to fit a logistic regression model. Lastly, I will use the summary() function to print the summary of the logistic regression model to examine the coefficients, standard errors, and significance levels.
 
 <pre lang="markdown"> 
 ```r 
